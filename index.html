@@ -3,898 +3,1055 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Melon Premium — Manajemen Agribisnis</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<title>Melon Premium — PBL Manajemen Agribisnis Polije Kampus 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Lora:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --green-deep: #1a3d2b;
-    --green-mid: #2e6b47;
-    --green-fresh: #4a9e6b;
-    --green-light: #a8d5b5;
-    --green-pale: #e8f5ed;
-    --melon-orange: #e8894a;
-    --melon-warm: #f5c07a;
-    --melon-cream: #fdf6ec;
-    --earth: #8b6b4a;
-    --earth-light: #c9a87c;
-    --white: #fefefe;
-    --text-dark: #1a2416;
-    --text-mid: #3d4f3a;
-    --text-muted: #7a8c76;
-  }
+:root {
+  --g900: #0f3320;
+  --g800: #1a5435;
+  --g700: #217a4a;
+  --g600: #2ea05f;
+  --g500: #3cbd76;
+  --g400: #5ed490;
+  --g300: #8ee8b0;
+  --g200: #c0f3d4;
+  --g100: #e4fbee;
+  --g050: #f4fdf8;
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  --lime:  #9ef441;
+  --lime2: #c6fc7b;
+  --gold:  #e8c56a;
 
-  html { scroll-behavior: smooth; }
+  --ink:   #0a2216;
+  --mid:   #2d5040;
+  --muted: #5a8068;
+  --pale:  #93bba6;
+  --line:  rgba(46,160,95,.14);
 
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--white);
-    color: var(--text-dark);
-    overflow-x: hidden;
-  }
+  --white: #ffffff;
+  --bg:    #f5fdf8;
 
-  /* NAV */
-  nav {
-    position: fixed; top: 0; width: 100%; z-index: 100;
-    padding: 18px 5%;
-    display: flex; justify-content: space-between; align-items: center;
-    background: rgba(254,254,254,0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(74,158,107,0.12);
-    transition: all 0.3s;
-  }
-  .nav-logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.2rem;
-    color: var(--green-deep);
-    font-weight: 700;
-    letter-spacing: -0.3px;
-  }
-  .nav-logo span { color: var(--green-fresh); font-style: italic; }
-  nav ul { list-style: none; display: flex; gap: 36px; }
-  nav ul a {
-    text-decoration: none;
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: var(--text-mid);
-    letter-spacing: 0.3px;
-    transition: color 0.2s;
-  }
-  nav ul a:hover { color: var(--green-fresh); }
-  .nav-cta {
-    background: var(--green-deep);
-    color: var(--white) !important;
-    padding: 9px 20px;
-    border-radius: 50px;
-    font-size: 0.82rem !important;
-    transition: background 0.2s !important;
-  }
-  .nav-cta:hover { background: var(--green-mid) !important; color: var(--white) !important; }
+  --shadow-sm: 0 4px 16px rgba(15,51,32,.08);
+  --shadow:    0 12px 40px rgba(15,51,32,.12);
+  --shadow-lg: 0 24px 60px rgba(15,51,32,.15);
 
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    padding: 100px 5% 60px;
-    background: var(--green-pale);
-    position: relative;
-    overflow: hidden;
-  }
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: -80px; right: -80px;
-    width: 500px; height: 500px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(74,158,107,0.12) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .hero::after {
-    content: '';
-    position: absolute;
-    bottom: -100px; left: 30%;
-    width: 600px; height: 300px;
-    border-radius: 50%;
-    background: radial-gradient(ellipse, rgba(232,137,74,0.07) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .hero-left { padding-right: 48px; }
-  .hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(74,158,107,0.12);
-    border: 1px solid rgba(74,158,107,0.3);
-    color: var(--green-mid);
-    font-size: 0.78rem;
-    font-weight: 500;
-    padding: 6px 14px;
-    border-radius: 50px;
-    margin-bottom: 28px;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-  }
-  .hero-badge::before { content: '🌱'; font-size: 0.85rem; }
-  .hero h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2.4rem, 4vw, 3.6rem);
-    line-height: 1.15;
-    color: var(--green-deep);
-    margin-bottom: 20px;
-    font-weight: 700;
-  }
-  .hero h1 em {
-    font-style: italic;
-    color: var(--green-fresh);
-  }
-  .hero-sub {
-    font-size: 1.05rem;
-    color: var(--text-mid);
-    line-height: 1.75;
-    margin-bottom: 40px;
-    font-weight: 300;
-    max-width: 480px;
-  }
-  .hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; }
-  .btn-primary {
-    background: var(--green-deep);
-    color: var(--white);
-    padding: 14px 32px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 500;
-    letter-spacing: 0.2px;
-    transition: all 0.3s;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    border: 2px solid var(--green-deep);
-  }
-  .btn-primary:hover {
-    background: var(--green-mid);
-    border-color: var(--green-mid);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(26,61,43,0.25);
-  }
-  .btn-secondary {
-    background: transparent;
-    color: var(--green-deep);
-    padding: 14px 32px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 500;
-    border: 2px solid var(--green-deep);
-    transition: all 0.3s;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .btn-secondary:hover {
-    background: var(--green-pale);
-    transform: translateY(-2px);
-  }
-  .hero-right {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .hero-img-wrapper {
-    width: 100%;
-    max-width: 500px;
-    aspect-ratio: 4/5;
-    border-radius: 40% 60% 60% 40% / 40% 40% 60% 60%;
-    overflow: hidden;
-    background: linear-gradient(135deg, var(--green-light) 0%, var(--green-fresh) 100%);
-    position: relative;
-    box-shadow: 0 30px 80px rgba(26,61,43,0.2);
-    animation: morphShape 8s ease-in-out infinite;
-  }
-  @keyframes morphShape {
-    0%, 100% { border-radius: 40% 60% 60% 40% / 40% 40% 60% 60%; }
-    33% { border-radius: 60% 40% 40% 60% / 60% 60% 40% 40%; }
-    66% { border-radius: 50% 50% 30% 70% / 30% 70% 70% 30%; }
-  }
-  .hero-img-wrapper img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-  .img-placeholder {
-    width: 100%; height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    color: var(--white);
-    font-size: 0.85rem;
-    font-weight: 500;
-    text-align: center;
-    padding: 20px;
-    opacity: 0.8;
-  }
-  .img-placeholder .icon { font-size: 3rem; opacity: 0.6; }
-  .hero-stats {
-    position: absolute;
-    bottom: -20px;
-    left: -20px;
-    background: var(--white);
-    padding: 16px 24px;
-    border-radius: 16px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-    display: flex;
-    gap: 24px;
-  }
-  .stat { text-align: center; }
-  .stat-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--green-deep);
-    line-height: 1;
-  }
-  .stat-label {
-    font-size: 0.72rem;
-    color: var(--text-muted);
-    margin-top: 3px;
-    white-space: nowrap;
-  }
+  --r: 16px;
+  --r-lg: 24px;
+}
 
-  /* SECTION BASE */
-  section { padding: 96px 5%; }
-  .section-tag {
-    font-size: 0.75rem;
-    font-weight: 500;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--green-fresh);
-    margin-bottom: 12px;
-  }
-  .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(1.8rem, 3vw, 2.6rem);
-    line-height: 1.25;
-    color: var(--green-deep);
-    margin-bottom: 20px;
-  }
-  .section-desc {
-    font-size: 1rem;
-    color: var(--text-mid);
-    line-height: 1.8;
-    font-weight: 300;
-    max-width: 600px;
-  }
+*,*::before,*::after { margin:0; padding:0; box-sizing:border-box }
+html { scroll-behavior: smooth }
+body { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 400; background: var(--bg); color: var(--ink); overflow-x: hidden; -webkit-font-smoothing: antialiased }
+a { color: inherit; text-decoration: none }
+img { display: block; max-width: 100% }
 
-  /* PRODUK */
-  .produk {
-    background: var(--white);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 72px;
-    align-items: center;
-  }
-  .produk-img {
-    aspect-ratio: 1;
-    border-radius: 24px;
-    overflow: hidden;
-    background: linear-gradient(145deg, var(--melon-cream) 0%, var(--melon-warm) 100%);
-    position: relative;
-    box-shadow: 0 20px 60px rgba(232,137,74,0.15);
-  }
-  .produk-img img { width: 100%; height: 100%; object-fit: cover; }
-  .produk-badges {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin: 28px 0;
-  }
-  .badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 8px 16px;
-    border-radius: 50px;
-    font-size: 0.82rem;
-    font-weight: 500;
-  }
-  .badge-green { background: var(--green-pale); color: var(--green-mid); border: 1px solid rgba(74,158,107,0.2); }
-  .badge-orange { background: #fef3ec; color: #b85a1e; border: 1px solid rgba(232,137,74,0.2); }
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar { width: 5px }
+::-webkit-scrollbar-track { background: var(--g050) }
+::-webkit-scrollbar-thumb { background: var(--g400); border-radius: 99px }
 
-  /* TENTANG PBL */
-  .pbl {
-    background: var(--green-deep);
-    color: var(--white);
-    border-radius: 32px;
-    margin: 0 4%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0;
-    overflow: hidden;
-    padding: 0;
-  }
-  .pbl-left {
-    padding: 72px 56px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  .pbl .section-tag { color: var(--green-light); }
-  .pbl .section-title { color: var(--white); }
-  .pbl .section-desc { color: rgba(255,255,255,0.75); max-width: 500px; }
-  .pbl-img {
-    position: relative;
-    overflow: hidden;
-    min-height: 400px;
-    background: linear-gradient(135deg, var(--green-mid) 0%, var(--green-fresh) 100%);
-  }
-  .pbl-img img { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; }
-  .pbl-img .img-overlay {
-    position: absolute; inset: 0;
-    background: linear-gradient(to right, var(--green-deep) 0%, transparent 40%);
-  }
+/* ─── NAV ─── */
+nav {
+  position: fixed; top: 0; width: 100%; z-index: 200;
+  padding: 0 5%; height: 68px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(245,253,248,.92); backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--line);
+  transition: background .3s;
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 10px;
+}
+.nav-logo-icon {
+  width: 36px; height: 36px; border-radius: 10px;
+  background: linear-gradient(135deg, var(--g500), var(--g700));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; box-shadow: 0 4px 12px rgba(60,189,118,.3);
+}
+.nav-brand { font-family: 'Lora', serif; font-size: 1rem; font-weight: 500; color: var(--g800); line-height: 1.1 }
+.nav-brand small { display: block; font-family: 'Plus Jakarta Sans', sans-serif; font-size: .6rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-top: 3px }
+.nav-links { display: flex; gap: 28px; list-style: none }
+.nav-links a { font-size: .72rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--mid); transition: color .2s }
+.nav-links a:hover { color: var(--g600) }
+.nav-cta {
+  font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--white); background: linear-gradient(135deg, var(--g500), var(--g700));
+  padding: 10px 20px; border-radius: 999px;
+  box-shadow: 0 6px 20px rgba(46,160,95,.28);
+  transition: transform .2s, box-shadow .2s;
+}
+.nav-cta:hover { transform: translateY(-1px); box-shadow: 0 10px 28px rgba(46,160,95,.35) }
 
-  /* PROSES */
-  .proses { background: var(--melon-cream); }
-  .proses-header { text-align: center; margin-bottom: 64px; }
-  .proses-header .section-desc { margin: 0 auto; max-width: 600px; }
-  .steps-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0;
-    position: relative;
-  }
-  .steps-grid::before {
-    content: '';
-    position: absolute;
-    top: 32px;
-    left: 12.5%;
-    right: 12.5%;
-    height: 2px;
-    background: linear-gradient(to right, var(--green-light), var(--melon-orange), var(--green-light));
-    z-index: 0;
-  }
-  .step {
-    text-align: center;
-    padding: 0 16px;
-    position: relative;
-    z-index: 1;
-  }
-  .step-num {
-    width: 64px; height: 64px;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 20px;
-    font-family: 'Playfair Display', serif;
-    font-size: 1.4rem;
-    font-weight: 700;
-    position: relative;
-    z-index: 2;
-    transition: transform 0.3s;
-  }
-  .step:hover .step-num { transform: scale(1.1); }
-  .step:nth-child(1) .step-num { background: var(--green-deep); color: var(--white); }
-  .step:nth-child(2) .step-num { background: var(--green-mid); color: var(--white); }
-  .step:nth-child(3) .step-num { background: var(--melon-orange); color: var(--white); }
-  .step:nth-child(4) .step-num { background: var(--earth); color: var(--white); }
-  .step-title {
-    font-weight: 600;
-    font-size: 0.95rem;
-    color: var(--green-deep);
-    margin-bottom: 8px;
-  }
-  .step-desc {
-    font-size: 0.82rem;
-    color: var(--text-muted);
-    line-height: 1.6;
-  }
-  .step-icon { font-size: 1.5rem; margin-bottom: 12px; }
-  .proses-note {
-    margin-top: 56px;
-    background: var(--white);
-    border-left: 4px solid var(--green-fresh);
-    padding: 20px 28px;
-    border-radius: 0 12px 12px 0;
-    font-size: 0.9rem;
-    color: var(--text-mid);
-    line-height: 1.75;
-    font-style: italic;
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
-  }
+/* ─── HERO ─── */
+#hero {
+  min-height: 100vh; padding-top: 68px;
+  display: grid; grid-template-columns: 1.1fr .9fr;
+  background: linear-gradient(160deg, #e8faf0 0%, #f5fdf8 40%, #eafaf2 100%);
+  position: relative; overflow: hidden;
+}
+.hero-blob {
+  position: absolute; pointer-events: none; border-radius: 50%;
+  filter: blur(60px); opacity: .55;
+}
+.hero-blob-1 { width: 500px; height: 500px; background: var(--g200); top: -80px; left: -120px }
+.hero-blob-2 { width: 380px; height: 380px; background: var(--lime2); bottom: -80px; right: 10%; opacity: .3 }
+.hero-blob-3 { width: 240px; height: 240px; background: var(--gold); top: 30%; left: 40%; opacity: .22 }
 
-  /* TESTIMONI */
-  .testimoni { background: var(--white); }
-  .testimoni-header { text-align: center; margin-bottom: 56px; }
-  .testi-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; max-width: 840px; margin: 0 auto; }
-  .testi-card {
-    background: var(--green-pale);
-    border-radius: 20px;
-    padding: 36px;
-    position: relative;
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
-  .testi-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 16px 48px rgba(26,61,43,0.12);
-  }
-  .testi-card::before {
-    content: '"';
-    position: absolute;
-    top: 16px; right: 28px;
-    font-family: 'Playfair Display', serif;
-    font-size: 6rem;
-    line-height: 1;
-    color: rgba(74,158,107,0.15);
-    font-weight: 700;
-  }
-  .testi-text {
-    font-size: 1.02rem;
-    color: var(--text-mid);
-    line-height: 1.7;
-    margin-bottom: 24px;
-    font-style: italic;
-    font-weight: 300;
-  }
-  .testi-author {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .testi-avatar {
-    width: 44px; height: 44px;
-    border-radius: 50%;
-    overflow: hidden;
-    background: linear-gradient(135deg, var(--green-fresh), var(--green-mid));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    color: var(--white);
-    font-size: 0.95rem;
-    flex-shrink: 0;
-  }
-  .testi-avatar img { width: 100%; height: 100%; object-fit: cover; }
-  .testi-name {
-    font-weight: 600;
-    font-size: 0.88rem;
-    color: var(--green-deep);
-  }
-  .testi-role { font-size: 0.78rem; color: var(--text-muted); }
-  .testi-stars {
-    color: var(--melon-orange);
-    font-size: 0.85rem;
-    margin-bottom: 6px;
-  }
+.hero-left { display: flex; flex-direction: column; justify-content: center; padding: 8% 7% 8% 8%; position: relative }
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(60,189,118,.12); border: 1px solid rgba(60,189,118,.25);
+  padding: 6px 14px; border-radius: 999px; margin-bottom: 32px;
+  animation: fadeUp .7s ease both;
+}
+.hero-eyebrow-dot { width: 7px; height: 7px; background: var(--g500); border-radius: 50%; animation: pulse 2s infinite }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.6;transform:scale(.85)} }
+.hero-eyebrow span { font-size: .65rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--g700) }
 
-  /* CTA SECTION */
-  .cta-section {
-    background: linear-gradient(135deg, var(--green-deep) 0%, #0f2b1a 100%);
-    text-align: center;
-    padding: 120px 5%;
-    position: relative;
-    overflow: hidden;
-  }
-  .cta-section::before {
-    content: '';
-    position: absolute;
-    top: -100px; left: 50%;
-    transform: translateX(-50%);
-    width: 600px; height: 600px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(74,158,107,0.15) 0%, transparent 70%);
-  }
-  .cta-section::after {
-    content: '';
-    position: absolute;
-    bottom: -50px; right: -50px;
-    width: 300px; height: 300px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(232,137,74,0.1) 0%, transparent 70%);
-  }
-  .cta-section .section-title { color: var(--white); }
-  .cta-section .section-desc { color: rgba(255,255,255,0.7); margin: 0 auto 44px; text-align: center; }
-  .btn-whatsapp {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: #25d366;
-    color: var(--white);
-    padding: 16px 40px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-size: 1rem;
-    font-weight: 600;
-    transition: all 0.3s;
-    box-shadow: 0 8px 32px rgba(37,211,102,0.3);
-    position: relative; z-index: 1;
-  }
-  .btn-whatsapp:hover {
-    background: #20bd5a;
-    transform: translateY(-3px);
-    box-shadow: 0 16px 48px rgba(37,211,102,0.4);
-  }
-  .cta-guarantee {
-    margin-top: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    color: rgba(255,255,255,0.5);
-    font-size: 0.8rem;
-  }
+.hero-title {
+  font-family: 'Lora', serif; font-size: clamp(2.8rem, 5vw, 5rem);
+  font-weight: 400; line-height: 1.06; color: var(--g900);
+  letter-spacing: -.02em; animation: fadeUp .7s .08s ease both;
+}
+.hero-title em { font-style: italic; color: var(--g600) }
+.hero-title .line-accent {
+  position: relative; display: inline-block;
+}
+.hero-title .line-accent::after {
+  content: ''; position: absolute; left: 0; bottom: 4px;
+  width: 100%; height: 8px;
+  background: linear-gradient(90deg, var(--lime2), var(--g300));
+  z-index: -1; border-radius: 4px; opacity: .6;
+}
 
-  /* FOOTER */
-  footer {
-    background: #0d1f13;
-    color: rgba(255,255,255,0.7);
-    padding: 56px 5% 32px;
-  }
-  .footer-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    gap: 48px;
-    margin-bottom: 48px;
-    padding-bottom: 48px;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-  }
-  .footer-brand .nav-logo { display: block; font-size: 1.4rem; margin-bottom: 16px; color: var(--white); }
-  .footer-brand p { font-size: 0.85rem; line-height: 1.7; max-width: 280px; }
-  .footer-col h4 {
-    color: var(--white);
-    font-size: 0.88rem;
-    font-weight: 600;
-    margin-bottom: 16px;
-    letter-spacing: 0.5px;
-  }
-  .footer-col ul { list-style: none; }
-  .footer-col ul li { margin-bottom: 10px; }
-  .footer-col ul a {
-    text-decoration: none;
-    color: rgba(255,255,255,0.55);
-    font-size: 0.85rem;
-    transition: color 0.2s;
-  }
-  .footer-col ul a:hover { color: var(--green-light); }
-  .footer-contact a {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: rgba(255,255,255,0.55);
-    text-decoration: none;
-    font-size: 0.85rem;
-    margin-bottom: 12px;
-    transition: color 0.2s;
-  }
-  .footer-contact a:hover { color: var(--green-light); }
-  .footer-bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.78rem;
-    color: rgba(255,255,255,0.3);
-  }
+.hero-sub { font-size: .9rem; line-height: 1.85; color: var(--muted); max-width: 420px; margin-top: 24px; animation: fadeUp .7s .16s ease both }
 
-  /* FLOAT WA BUTTON */
-  .float-wa {
-    position: fixed;
-    bottom: 28px; right: 28px;
-    z-index: 200;
-    background: #25d366;
-    width: 56px; height: 56px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    box-shadow: 0 4px 20px rgba(37,211,102,0.4);
-    transition: all 0.3s;
-    font-size: 1.5rem;
-  }
-  .float-wa:hover {
-    transform: scale(1.1);
-    box-shadow: 0 8px 32px rgba(37,211,102,0.5);
-  }
+.hero-btns { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 36px; animation: fadeUp .7s .24s ease both }
+.btn-primary {
+  font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--white); background: linear-gradient(135deg, var(--g500), var(--g700));
+  padding: 14px 28px; border-radius: 999px;
+  box-shadow: 0 8px 24px rgba(46,160,95,.3);
+  transition: transform .2s, box-shadow .2s; display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(46,160,95,.38) }
+.btn-secondary {
+  font-size: .72rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--g700); background: var(--white);
+  border: 1.5px solid rgba(46,160,95,.3);
+  padding: 14px 28px; border-radius: 999px;
+  transition: all .2s;
+}
+.btn-secondary:hover { border-color: var(--g500); background: var(--g050); transform: translateY(-1px) }
 
-  /* ANIMATIONS */
-  .fade-up {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-  .fade-up.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  .fade-up:nth-child(2) { transition-delay: 0.1s; }
-  .fade-up:nth-child(3) { transition-delay: 0.2s; }
-  .fade-up:nth-child(4) { transition-delay: 0.3s; }
+.hero-stats { display: flex; gap: 32px; margin-top: 48px; animation: fadeUp .7s .32s ease both }
+.stat-item { display: flex; flex-direction: column }
+.stat-n { font-family: 'Lora', serif; font-size: 1.8rem; font-weight: 500; color: var(--g800); line-height: 1 }
+.stat-l { font-size: .65rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-top: 4px }
 
-  /* RESPONSIVE */
-  @media (max-width: 900px) {
-    .hero { grid-template-columns: 1fr; padding-top: 120px; gap: 48px; }
-    .hero-left { padding-right: 0; }
-    .hero-right { display: none; }
-    .produk { grid-template-columns: 1fr; }
-    .pbl { grid-template-columns: 1fr; margin: 0 2%; }
-    .pbl-img { min-height: 280px; }
-    .steps-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
-    .steps-grid::before { display: none; }
-    .testi-grid { grid-template-columns: 1fr; }
-    .footer-grid { grid-template-columns: 1fr; gap: 32px; }
-    nav ul { display: none; }
-  }
+.hero-right { position: relative; display: flex; align-items: stretch; padding: 40px 6% 40px 0 }
+.hero-img-wrap {
+  width: 100%; border-radius: var(--r-lg);
+  background: linear-gradient(145deg, var(--g200) 0%, var(--g300) 50%, var(--g100) 100%);
+  position: relative; overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  animation: slideIn 1s ease both;
+}
+.hero-img-inner {
+  width: 100%; height: 100%; min-height: 480px;
+  display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-end; padding: 28px;
+}
+.hero-ph-text { font-family: 'Lora', serif; font-size: .9rem; font-style: italic; color: rgba(15,51,32,.45); line-height: 1.8 }
+.hero-badge {
+  position: absolute; top: 24px; right: 24px;
+  background: var(--white); border-radius: var(--r); padding: 14px 18px;
+  box-shadow: var(--shadow); border: 1px solid var(--line);
+  animation: fadeUp .7s .5s ease both;
+}
+.hero-badge-label { font-size: .58rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 3px }
+.hero-badge-val { font-family: 'Lora', serif; font-size: 1rem; font-weight: 500; color: var(--g800) }
+
+@keyframes fadeUp { from { opacity:0; transform:translateY(20px) } to { opacity:1; transform:translateY(0) } }
+@keyframes slideIn { from { opacity:0; transform:scale(1.04) } to { opacity:1; transform:scale(1) } }
+@keyframes zoomIn { from { transform:scale(1.05) } to { transform:scale(1) } }
+
+/* ─── SECTION COMMONS ─── */
+.sec { padding: 96px 5% }
+.inner { max-width: 1180px; margin: 0 auto }
+.section-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--g100); border: 1px solid var(--g200);
+  padding: 5px 14px; border-radius: 999px; margin-bottom: 20px;
+}
+.section-tag span { font-size: .62rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--g700) }
+.section-heading {
+  font-family: 'Lora', serif; font-size: clamp(1.9rem, 3.5vw, 3rem);
+  font-weight: 400; line-height: 1.12; color: var(--g900); letter-spacing: -.015em;
+}
+.section-heading em { font-style: italic; color: var(--g600) }
+.section-sub { font-size: .88rem; line-height: 1.9; color: var(--muted); margin-top: 14px }
+.divider { width: 40px; height: 3px; background: linear-gradient(90deg, var(--g500), var(--g300)); border-radius: 99px; margin: 22px 0 }
+
+/* ─── PRODUK ─── */
+#produk { background: var(--white) }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center }
+
+.product-img-wrap {
+  border-radius: var(--r-lg); overflow: hidden;
+  box-shadow: var(--shadow);
+  background: linear-gradient(145deg, var(--g050), var(--g100) 50%, #fffdf0);
+  position: relative;
+}
+.product-img-ph {
+  width: 100%; aspect-ratio: 4/5;
+  display: flex; align-items: flex-end; padding: 24px;
+}
+.product-badge-float {
+  position: absolute; bottom: 20px; left: 20px; right: 20px;
+  background: rgba(255,255,255,.95); backdrop-filter: blur(12px);
+  border-radius: 14px; padding: 16px 18px;
+  border: 1px solid rgba(255,255,255,.7);
+  box-shadow: var(--shadow-sm);
+}
+.pb-title { font-size: .68rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--g700); margin-bottom: 4px }
+.pb-sub { font-size: .74rem; color: var(--muted); line-height: 1.55; font-weight: 400 }
+
+.feat-list { margin-top: 32px }
+.feat-row {
+  display: grid; grid-template-columns: 130px 1fr;
+  padding: 15px 0; border-bottom: 1px solid var(--line); gap: 20px; align-items: start;
+}
+.feat-row:first-child { border-top: 1px solid var(--line) }
+.feat-k { font-size: .63rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--g600); padding-top: 2px }
+.feat-v { font-size: .85rem; line-height: 1.75; color: var(--mid); font-weight: 400 }
+
+/* ─── PBL ─── */
+#pbl { background: var(--g050) }
+.pbl-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start }
+.pbl-cards { display: flex; flex-direction: column; gap: 0; border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid var(--line) }
+.pbl-card {
+  display: flex; align-items: flex-start; gap: 18px;
+  padding: 22px 24px; background: var(--white);
+  border-bottom: 1px solid var(--line); transition: background .2s;
+}
+.pbl-card:last-child { border-bottom: none }
+.pbl-card:hover { background: var(--g050) }
+.pbl-num {
+  width: 38px; height: 38px; border-radius: 10px; flex-shrink: 0;
+  background: linear-gradient(135deg, var(--g100), var(--g200));
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Lora', serif; font-size: 1rem; font-weight: 500; color: var(--g700);
+}
+.pbl-text strong { display: block; font-size: .82rem; font-weight: 700; color: var(--ink); margin-bottom: 4px }
+.pbl-text span { font-size: .79rem; line-height: 1.75; color: var(--muted) }
+
+/* ─── BUDIDAYA ─── */
+#budidaya { background: var(--white) }
+.bud-head { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-bottom: 48px; align-items: end }
+.stages { display: grid; grid-template-columns: repeat(5,1fr); border-radius: var(--r-lg); overflow: hidden; border: 1px solid var(--line); box-shadow: var(--shadow-sm) }
+.stage {
+  padding: 28px 20px; background: var(--white);
+  border-right: 1px solid var(--line);
+  transition: background .2s, transform .2s; position: relative;
+}
+.stage:last-child { border-right: none }
+.stage:hover { background: var(--g050); transform: translateY(-3px) }
+.st-num {
+  width: 32px; height: 32px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--g500), var(--g600));
+  display: flex; align-items: center; justify-content: center;
+  font-size: .72rem; font-weight: 800; color: var(--white); margin-bottom: 16px;
+  box-shadow: 0 4px 12px rgba(46,160,95,.25);
+}
+.st-t { font-size: .77rem; font-weight: 700; color: var(--g900); display: block; margin-bottom: 8px; line-height: 1.4 }
+.st-d { font-size: .75rem; line-height: 1.75; color: var(--muted) }
+
+/* ─── KEUNGGULAN ─── */
+#keunggulan { background: var(--g050) }
+.ku-layout { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; align-items: start }
+.ku-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px }
+.ku-card {
+  padding: 26px 24px; border-radius: var(--r); background: var(--white);
+  border: 1px solid var(--line); box-shadow: var(--shadow-sm);
+  transition: transform .2s, box-shadow .2s, border-color .2s;
+}
+.ku-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: var(--g300) }
+.ku-icon {
+  width: 40px; height: 40px; border-radius: 10px;
+  background: linear-gradient(135deg, var(--g100), var(--g200));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; margin-bottom: 14px;
+}
+.ku-t { font-size: .83rem; font-weight: 700; color: var(--ink); display: block; margin-bottom: 7px }
+.ku-d { font-size: .79rem; line-height: 1.8; color: var(--muted) }
+
+/* ─── GALERI ─── */
+#galeri { background: var(--white) }
+.gal-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 32px }
+.gal-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: auto auto; gap: 14px }
+.gal-item { border-radius: var(--r); overflow: hidden; background: var(--white); box-shadow: var(--shadow-sm); border: 1px solid var(--line) }
+.gal-item:first-child { grid-row: span 2 }
+.gal-ph {
+  width: 100%; min-height: 200px; flex: 1;
+  background: linear-gradient(145deg, var(--g100), var(--g200), var(--g050));
+  display: flex; align-items: flex-end; padding: 14px; transition: transform .4s;
+}
+.gal-item:first-child .gal-ph { min-height: 440px }
+.gal-item:hover .gal-ph { transform: scale(1.02) }
+.gal-ph-note { font-size: .6rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: rgba(15,51,32,.35) }
+.gal-info { padding: 13px 16px; border-top: 1px solid var(--line) }
+.gal-title { font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--g700); margin-bottom: 3px }
+.gal-desc { font-size: .72rem; color: var(--muted); line-height: 1.6 }
+
+/* ─── TESTIMONI ─── */
+#testimoni { background: var(--g050) }
+.testi-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 48px }
+.testi-card {
+  padding: 30px; background: var(--white); border-radius: var(--r-lg);
+  border: 1px solid var(--line); box-shadow: var(--shadow-sm);
+  position: relative; overflow: hidden;
+}
+.testi-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--g400), var(--g300));
+}
+.testi-q { font-family: 'Lora', serif; font-size: 3rem; line-height: .8; color: var(--g200); display: block; margin-bottom: 16px }
+.testi-text { font-family: 'Lora', serif; font-size: 1rem; line-height: 1.85; color: var(--mid); font-style: italic; margin-bottom: 24px }
+.testi-author { display: flex; align-items: center; gap: 12px }
+.testi-avatar {
+  width: 36px; height: 36px; border-radius: 999px;
+  background: linear-gradient(135deg, var(--g400), var(--g600));
+  display: flex; align-items: center; justify-content: center;
+  font-size: .85rem; font-weight: 700; color: var(--white);
+  flex-shrink: 0;
+}
+.testi-name { font-size: .77rem; font-weight: 700; color: var(--ink) }
+.testi-role { font-size: .7rem; color: var(--muted); margin-top: 2px }
+
+/* ─── PESAN ─── */
+#pesan { background: var(--white) }
+.pesan-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-top: 48px; align-items: start }
+.info-card { border-radius: var(--r-lg); overflow: hidden; border: 1px solid var(--line); box-shadow: var(--shadow-sm) }
+.info-card-head {
+  padding: 22px 26px;
+  background: linear-gradient(135deg, var(--g500), var(--g700));
+  display: flex; align-items: center; gap: 10px;
+}
+.info-card-head-icon { font-size: 1.2rem }
+.info-card-head-title { font-family: 'Lora', serif; font-size: 1rem; font-weight: 500; color: var(--white) }
+.info-row { display: grid; grid-template-columns: 110px 1fr; padding: 15px 26px; border-bottom: 1px solid var(--line); gap: 14px; align-items: start }
+.info-row:last-child { border-bottom: none }
+.i-k { font-size: .62rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--g600); padding-top: 2px }
+.i-v { font-size: .83rem; line-height: 1.75; color: var(--mid) }
+
+.cta-wa {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  margin-top: 16px; padding: 15px 24px; border-radius: 999px;
+  background: #25d366; color: var(--white);
+  font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  box-shadow: 0 8px 24px rgba(37,211,102,.3); transition: all .2s;
+}
+.cta-wa:hover { background: #1db954; transform: translateY(-2px); box-shadow: 0 12px 30px rgba(37,211,102,.38) }
+.cta-order {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  margin-top: 10px; padding: 15px 24px; border-radius: 999px;
+  background: linear-gradient(135deg, var(--g500), var(--g700)); color: var(--white);
+  font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  box-shadow: 0 8px 24px rgba(46,160,95,.3); transition: all .2s;
+}
+.cta-order:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(46,160,95,.38) }
+
+.avail-list { margin-top: 6px; border-radius: var(--r-lg); overflow: hidden; border: 1px solid var(--line); background: var(--white); box-shadow: var(--shadow-sm) }
+.avail-row { display: flex; justify-content: space-between; align-items: center; padding: 15px 22px; border-bottom: 1px solid var(--line); gap: 12px }
+.avail-row:last-child { border-bottom: none }
+.avail-name { font-size: .84rem; color: var(--mid); display: flex; align-items: center; gap: 8px }
+.avail-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--g500); flex-shrink: 0 }
+.avail-tag {
+  font-size: .6rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  padding: 4px 12px; border-radius: 999px; white-space: nowrap;
+}
+.avail-tag.ready { color: var(--g700); background: var(--g100) }
+.avail-tag.inquiry { color: var(--g800); background: var(--g200) }
+
+/* ─── TIM ─── */
+#tim { background: var(--g050) }
+.tim-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center }
+.tim-img-wrap {
+  border-radius: var(--r-lg); overflow: hidden;
+  background: linear-gradient(150deg, var(--g100), var(--g200), var(--g050));
+  box-shadow: var(--shadow);
+}
+.tim-img-ph { width: 100%; aspect-ratio: 3/4; display: flex; align-items: flex-end; padding: 22px }
+.tim-img-caption { font-size: .62rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: rgba(15,51,32,.35) }
+.tim-rows { margin-top: 28px }
+.tim-row { display: grid; grid-template-columns: 130px 1fr; padding: 14px 0; border-bottom: 1px solid var(--line); gap: 14px }
+.tim-row:first-child { border-top: 1px solid var(--line) }
+.tim-k { font-size: .62rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--g600); padding-top: 2px }
+.tim-v { font-size: .83rem; color: var(--mid); line-height: 1.65 }
+
+/* ─── KRITIK & SARAN ─── */
+#kritik {
+  background: linear-gradient(160deg, var(--g800) 0%, var(--g700) 50%, var(--g900) 100%);
+  position: relative; overflow: hidden;
+}
+.kritik-blob { position: absolute; border-radius: 50%; pointer-events: none; filter: blur(80px) }
+.kritik-blob-1 { width: 400px; height: 400px; background: var(--g500); opacity: .15; top: -100px; right: -80px }
+.kritik-blob-2 { width: 300px; height: 300px; background: var(--lime); opacity: .1; bottom: -80px; left: 5% }
+
+.kritik-inner { position: relative; max-width: 960px; margin: 0 auto }
+.kritik-header { text-align: center; margin-bottom: 48px }
+.kritik-tag { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2); padding: 6px 16px; border-radius: 999px; margin-bottom: 24px }
+.kritik-tag span { font-size: .62rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--g200) }
+.kritik-title { font-family: 'Lora', serif; font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 400; color: var(--white); line-height: 1.12; letter-spacing: -.018em }
+.kritik-title em { font-style: italic; color: var(--g300) }
+.kritik-sub { font-size: .9rem; line-height: 1.85; color: rgba(255,255,255,.65); margin-top: 14px; max-width: 520px; margin-left: auto; margin-right: auto }
+
+/* FORM LAYOUT */
+.kritik-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start }
+
+/* FORM CARD */
+.form-card {
+  background: rgba(255,255,255,.07); backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,.15); border-radius: var(--r-lg);
+  padding: 32px; display: flex; flex-direction: column; gap: 20px;
+}
+.form-group { display: flex; flex-direction: column; gap: 8px }
+.form-label {
+  font-size: .62rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--g300);
+}
+.form-input, .form-select, .form-textarea {
+  width: 100%; padding: 12px 15px;
+  background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18);
+  border-radius: 12px; outline: none;
+  font-family: 'Plus Jakarta Sans', sans-serif; font-size: .86rem; font-weight: 400;
+  color: var(--white); transition: border-color .2s, background .2s;
+}
+.form-input::placeholder, .form-textarea::placeholder { color: rgba(255,255,255,.35) }
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: var(--g400); background: rgba(255,255,255,.12);
+}
+.form-select { appearance: none; cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%238ee8b0' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px }
+.form-select option { background: #1a5435; color: white }
+.form-textarea { resize: vertical; min-height: 110px; line-height: 1.75 }
+
+/* STAR RATING */
+.star-row { display: flex; gap: 6px; align-items: center }
+.star-btn {
+  background: none; border: none; cursor: pointer; font-size: 1.6rem;
+  color: rgba(255,255,255,.2); transition: color .15s, transform .15s; line-height: 1; padding: 0;
+}
+.star-btn.active { color: var(--gold); transform: scale(1.1) }
+.star-btn:hover { color: var(--gold); transform: scale(1.15) }
+.star-label { font-size: .75rem; color: rgba(255,255,255,.5); margin-left: 8px }
+
+/* SUBMIT BTN */
+.form-submit {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  width: 100%; padding: 15px; border: none; border-radius: 999px; cursor: pointer;
+  background: #25d366; color: var(--white);
+  font-family: 'Plus Jakarta Sans', sans-serif; font-size: .75rem; font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase;
+  box-shadow: 0 8px 28px rgba(37,211,102,.3);
+  transition: all .2s;
+}
+.form-submit:hover:not(:disabled) { background: #1db954; transform: translateY(-2px); box-shadow: 0 14px 36px rgba(37,211,102,.4) }
+.form-submit:disabled { opacity: .5; cursor: not-allowed }
+.form-submit svg { width: 18px; height: 18px; fill: currentColor; flex-shrink: 0 }
+.form-note { font-size: .68rem; color: rgba(255,255,255,.45); text-align: center; line-height: 1.7 }
+
+/* PREVIEW CARD */
+.preview-card {
+  background: rgba(255,255,255,.07); backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,.15); border-radius: var(--r-lg); overflow: hidden;
+  position: sticky; top: 88px;
+}
+.preview-header {
+  padding: 16px 22px; border-bottom: 1px solid rgba(255,255,255,.1);
+  display: flex; align-items: center; gap: 10px;
+}
+.preview-header-dot { width: 8px; height: 8px; border-radius: 50%; background: #25d366; flex-shrink: 0 }
+.preview-header-label { font-size: .62rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.55) }
+.preview-wa-header {
+  padding: 12px 18px; background: rgba(37,211,102,.15);
+  display: flex; align-items: center; gap: 10px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.preview-wa-avatar {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--g400), var(--g600));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; flex-shrink: 0;
+}
+.preview-wa-name { font-size: .8rem; font-weight: 700; color: rgba(255,255,255,.9) }
+.preview-wa-status { font-size: .66rem; color: rgba(255,255,255,.45) }
+.preview-bubble-wrap { padding: 16px; background: rgba(0,0,0,.15); min-height: 200px }
+.preview-bubble {
+  background: rgba(37,211,102,.15); border: 1px solid rgba(37,211,102,.25);
+  border-radius: 4px 16px 16px 16px; padding: 14px 16px;
+  font-size: .8rem; line-height: 1.85; color: rgba(255,255,255,.85);
+  white-space: pre-wrap; word-break: break-word;
+  max-height: 320px; overflow-y: auto;
+}
+.preview-bubble strong { color: var(--g300) }
+.preview-bubble em { color: var(--gold); font-style: normal }
+
+/* ─── FOOTER ─── */
+footer { background: var(--g900); padding: 64px 5% 32px }
+.foot-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,.08) }
+.foot-brand { font-family: 'Lora', serif; font-size: 1.5rem; font-weight: 400; color: var(--g200); display: block; margin-bottom: 10px }
+.foot-desc { font-size: .8rem; line-height: 1.9; color: rgba(255,255,255,.5); max-width: 280px }
+.foot-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: rgba(60,189,118,.18); border: 1px solid rgba(60,189,118,.3);
+  padding: 5px 13px; border-radius: 999px; margin-top: 18px;
+}
+.foot-badge span { font-size: .6rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--g300) }
+.foot-badge-dot { width: 6px; height: 6px; background: var(--g400); border-radius: 50%; animation: pulse 2s infinite }
+.foot-col h5 { font-size: .6rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.6); margin-bottom: 16px }
+.foot-col a, .foot-col p { display: block; font-size: .78rem; color: rgba(255,255,255,.45); margin-bottom: 9px; transition: color .2s }
+.foot-col a:hover { color: var(--g300) }
+.foot-bottom { padding-top: 24px; display: flex; justify-content: space-between; align-items: center; gap: 14px }
+.foot-copy { font-size: .67rem; color: rgba(255,255,255,.3) }
+.foot-made { font-size: .67rem; color: rgba(255,255,255,.3) }
+
+/* ─── REVEAL ─── */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .65s ease, transform .65s ease }
+.reveal.up { opacity: 1; transform: translateY(0) }
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:960px){
+  .nav-links { display: none }
+  #hero { grid-template-columns: 1fr }
+  .hero-left { padding: 64px 6% 48px }
+  .hero-right { min-height: 320px; padding: 0 6% 48px }
+  .hero-img-inner { min-height: 320px }
+  .grid-2,.pbl-layout,.bud-head,.ku-layout,.pesan-grid,.tim-layout { grid-template-columns: 1fr; gap: 40px }
+  .sec { padding: 72px 5% }
+  .stages { grid-template-columns: 1fr 1fr }
+  .stage { border-right: none; border-bottom: 1px solid var(--line) }
+  .stage:last-child { border-bottom: none }
+  .testi-grid { grid-template-columns: 1fr }
+  .foot-grid { grid-template-columns: 1fr; gap: 28px }
+  .ku-grid { grid-template-columns: 1fr }
+  .gal-grid { grid-template-columns: 1fr }
+  .gal-item:first-child { grid-row: auto }
+  .gal-item:first-child .gal-ph { min-height: 280px }
+  .kritik-layout { grid-template-columns: 1fr }
+  .feat-row,.info-row,.tim-row { grid-template-columns: 1fr; gap: 4px }
+  .foot-bottom { flex-direction: column; text-align: center }
+  .preview-card { position: static }
+}
+@media(max-width:560px){
+  .hero-stats { gap: 20px }
+  .btn-primary,.btn-secondary { width: 100%; text-align: center; justify-content: center }
+  .hero-btns { flex-direction: column }
+  .stages { grid-template-columns: 1fr }
+}
 </style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">Melon<span>PBL</span></div>
-  <ul>
+  <div class="nav-logo">
+    <div class="nav-logo-icon">🍈</div>
+    <div class="nav-brand">Melon Premium PBL<small>Manajemen Agribisnis · Polije Kampus 2 Bondowoso</small></div>
+  </div>
+  <ul class="nav-links">
     <li><a href="#produk">Produk</a></li>
-    <li><a href="#tentang">Tentang PBL</a></li>
-    <li><a href="#proses">Proses</a></li>
-    <li><a href="#testimoni">Testimoni</a></li>
-    <li><a href="#pesan" class="nav-cta">Pesan Sekarang</a></li>
+    <li><a href="#budidaya">Budidaya</a></li>
+    <li><a href="#galeri">Galeri</a></li>
+    <li><a href="#pesan">Pesan</a></li>
+    <li><a href="#kritik">Kritik & Saran</a></li>
   </ul>
+  <a href="#pesan" class="nav-cta">Pesan Sekarang</a>
 </nav>
 
 <!-- HERO -->
-<section class="hero">
+<section id="hero">
+  <div class="hero-blob hero-blob-1"></div>
+  <div class="hero-blob hero-blob-2"></div>
+  <div class="hero-blob hero-blob-3"></div>
+
   <div class="hero-left">
-    <div class="hero-badge">Project-Based Learning · Manajemen Agribisnis</div>
-    <h1>Melon <em>Premium</em><br>Hasil Karya<br>Mahasiswa Agribisnis</h1>
-    <p class="hero-sub">Dibudidayakan langsung melalui Project-Based Learning oleh mahasiswa Manajemen Agribisnis — dari tanam hingga siap dinikmati.</p>
-    <div class="hero-buttons">
-      <a href="#pesan" class="btn-primary">🛒 Pesan Sekarang</a>
-      <a href="#tentang" class="btn-secondary">▶ Lihat Cerita Proyek</a>
+    <div class="hero-eyebrow">
+      <span class="hero-eyebrow-dot"></span>
+      <span>Project Based Learning · 2024 — 2025</span>
     </div>
-  </div>
-  <div class="hero-right">
-    <div class="hero-img-wrapper">
-      <!-- SLOT GAMBAR HERO: Ganti src di bawah dengan URL gambar Anda -->
-      <img src="" alt="Melon Premium" 
-           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-           style="display:none;">
-      <div class="img-placeholder">
-        <div class="icon">🍈</div>
-        <strong>Slot Gambar Hero</strong>
-        <span style="font-size:0.75rem; opacity:0.7;">Ukuran ideal: 600×750px</span>
-      </div>
+    <h1 class="hero-title">
+      Melon<br>
+      <em>Premium</em><br>
+      <span class="line-accent">Hasil Budidaya</span><br>
+      Mahasiswa
+    </h1>
+    <p class="hero-sub">Produk melon berkualitas dari kegiatan Project Based Learning mahasiswa Manajemen Agribisnis Politeknik Negeri Jember Kampus 2 Bondowoso.</p>
+    <div class="hero-btns">
+      <a href="#pesan" class="btn-primary">
+        <span>🛒</span> Pesan Sekarang
+      </a>
+      <a href="#budidaya" class="btn-secondary">Lihat Proses</a>
     </div>
     <div class="hero-stats">
-      <div class="stat">
-        <div class="stat-num">100%</div>
-        <div class="stat-label">Alami</div>
+      <div class="stat-item">
+        <span class="stat-n">5</span>
+        <span class="stat-l">Tahap Budidaya</span>
       </div>
-      <div class="stat">
-        <div class="stat-num">Segar</div>
-        <div class="stat-label">Langsung Kebun</div>
+      <div class="stat-item" style="border-left:1px solid var(--line);padding-left:32px">
+        <span class="stat-n">100%</span>
+        <span class="stat-l">Hasil Mahasiswa</span>
       </div>
-      <div class="stat">
-        <div class="stat-num">PBL</div>
-        <div class="stat-label">Karya Mahasiswa</div>
+      <div class="stat-item" style="border-left:1px solid var(--line);padding-left:32px">
+        <span class="stat-n">Fresh</span>
+        <span class="stat-l">Langsung Kebun</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-img-wrap">
+      <div class="hero-img-inner">
+        <span class="hero-ph-text">Ganti dengan foto melon / lahan<br>src="foto-hero.jpg"</span>
+      </div>
+      <div class="hero-badge">
+        <div class="hero-badge-label">Status Stok</div>
+        <div class="hero-badge-val">🟢 Tersedia</div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- PRODUK -->
-<section class="produk" id="produk">
-  <div class="produk-img fade-up">
-    <!-- SLOT GAMBAR PRODUK: Ganti src dengan URL gambar melon Anda -->
-    <img src="" alt="Melon Segar" 
-         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-         style="display:none; width:100%; height:100%; object-fit:cover;">
-    <div class="img-placeholder" style="background: linear-gradient(145deg, #fdf6ec, #f5c07a); color: #8b6b4a; min-height: 460px;">
-      <div class="icon">🍈</div>
-      <strong>Slot Gambar Produk</strong>
-      <span style="font-size:0.75rem; opacity:0.7;">Ukuran ideal: 600×600px</span>
-    </div>
-  </div>
-  <div class="fade-up">
-    <p class="section-tag">Produk Unggulan</p>
-    <h2 class="section-title">Melon Segar, Manis, dan Berkualitas</h2>
-    <p class="section-desc">Melon yang kami hasilkan dibudidayakan dengan perawatan intensif dan standar budidaya yang baik. Dipanen pada waktu terbaik untuk memastikan rasa manis alami dan kesegaran maksimal.</p>
-    <div class="produk-badges">
-      <span class="badge badge-green">🌿 Manis alami dan segar</span>
-      <span class="badge badge-green">🌾 Dipanen langsung dari kebun</span>
-      <span class="badge badge-orange">⚡ Praktik agribisnis modern</span>
-      <span class="badge badge-orange">🎓 Hasil kerja nyata mahasiswa</span>
-    </div>
-    <a href="#pesan" class="btn-primary">🛒 Pesan Sekarang</a>
-  </div>
-</section>
-
-<!-- TENTANG PBL -->
-<section style="padding: 80px 0;" id="tentang">
-  <div class="pbl">
-    <div class="pbl-left">
-      <p class="section-tag">Tentang Proyek</p>
-      <h2 class="section-title">Belajar Langsung dari Dunia Nyata</h2>
-      <p class="section-desc">Produk ini merupakan bagian dari kegiatan Project-Based Learning (PBL) mahasiswa Manajemen Agribisnis. Melalui proyek ini, mahasiswa tidak hanya belajar teori, tetapi langsung terjun ke lapangan mengelola usaha agribisnis secara nyata.</p>
-      <p class="section-desc" style="margin-top: 16px;">Mulai dari perencanaan, budidaya, hingga pemasaran, semua dilakukan oleh mahasiswa dengan pendampingan dosen. Kegiatan ini dirancang untuk membentuk lulusan yang siap menjadi agripreneur dan profesional di bidang agribisnis.</p>
-    </div>
-    <div class="pbl-img">
-      <!-- SLOT GAMBAR PBL: Ganti src dengan foto kegiatan mahasiswa -->
-      <img src="" alt="Kegiatan PBL" 
-           onerror="this.style.display='none';"
-           style="display:none; width:100%; height:100%; object-fit:cover;">
-      <div class="img-placeholder" style="min-height: 400px;">
-        <div class="icon">👨‍🎓</div>
-        <strong>Slot Foto Kegiatan</strong>
-        <span style="font-size:0.75rem; opacity:0.7;">Foto mahasiswa di kebun</span>
+<section id="produk" class="sec">
+  <div class="inner">
+    <div class="grid-2">
+      <div class="product-img-wrap reveal">
+        <div class="product-img-ph">
+          <span style="font-family:'Lora',serif;font-style:italic;color:rgba(15,51,32,.4);font-size:.9rem">src="foto-produk.jpg"</span>
+        </div>
+        <div class="product-badge-float">
+          <div class="pb-title">Melon Premium</div>
+          <div class="pb-sub">Hasil Budidaya Mahasiswa Manajemen Agribisnis — Polije Kampus 2 Bondowoso</div>
+        </div>
       </div>
-      <div class="pbl-img" style="position:absolute; inset:0; background: linear-gradient(to right, #1a3d2b 0%, transparent 40%); pointer-events:none;"></div>
+
+      <div class="reveal">
+        <div class="section-tag"><span>Tentang Produk</span></div>
+        <h2 class="section-heading">Melon Segar,<br><em>Manis & Berkualitas</em></h2>
+        <div class="divider"></div>
+        <p class="section-sub">Melon premium hasil budidaya mahasiswa melalui kegiatan Project Based Learning. Setiap tahap produksi dilakukan dengan memperhatikan kualitas tanaman, pemeliharaan buah, hingga proses panen yang optimal.</p>
+        <div class="feat-list">
+          <div class="feat-row"><span class="feat-k">Dibudidayakan</span><span class="feat-v">Langsung oleh mahasiswa Manajemen Agribisnis dalam kegiatan PBL terstruktur.</span></div>
+          <div class="feat-row"><span class="feat-k">Kualitas</span><span class="feat-v">Dipanen pada tingkat kematangan optimal, segar, dan manis.</span></div>
+          <div class="feat-row"><span class="feat-k">Tersedia Untuk</span><span class="feat-v">Konsumsi pribadi, oleh-oleh, hampers, dan kebutuhan acara.</span></div>
+          <div class="feat-row"><span class="feat-k">Nilai Tambah</span><span class="feat-v">Mendukung pembelajaran praktik dan kewirausahaan mahasiswa.</span></div>
+          <div class="feat-row"><span class="feat-k">Pendekatan</span><span class="feat-v">Agribisnis menyeluruh: produksi, pemasaran, distribusi, dan kepuasan pelanggan.</span></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- PROSES -->
-<section class="proses" id="proses">
-  <div class="proses-header fade-up">
-    <p class="section-tag">Tahapan Produksi</p>
-    <h2 class="section-title">Dari Bibit Hingga Siap Anda Nikmati</h2>
-    <p class="section-desc">Setiap buah melon melalui proses yang terencana dan terkontrol dengan baik, dengan keterlibatan langsung mahasiswa di setiap tahap.</p>
-  </div>
-  <div class="steps-grid">
-    <div class="step fade-up">
-      <div class="step-icon">🌱</div>
-      <div class="step-num">01</div>
-      <div class="step-title">Pemilihan Bibit Unggul</div>
-      <p class="step-desc">Seleksi ketat bibit berkualitas untuk hasil panen optimal dan konsisten</p>
-    </div>
-    <div class="step fade-up">
-      <div class="step-icon">🌿</div>
-      <div class="step-num">02</div>
-      <div class="step-title">Penanaman & Perawatan</div>
-      <p class="step-desc">Budidaya intensif dengan monitoring harian oleh tim mahasiswa</p>
-    </div>
-    <div class="step fade-up">
-      <div class="step-icon">🔬</div>
-      <div class="step-num">03</div>
-      <div class="step-title">Pengendalian Kualitas</div>
-      <p class="step-desc">Standar mutu ketat di setiap fase pertumbuhan hingga panen</p>
-    </div>
-    <div class="step fade-up">
-      <div class="step-icon">📦</div>
-      <div class="step-num">04</div>
-      <div class="step-title">Panen & Distribusi</div>
-      <p class="step-desc">Dipanen di momen terbaik dan dikemas untuk kesegaran maksimal</p>
+<!-- PBL -->
+<section id="pbl" class="sec">
+  <div class="inner">
+    <div class="pbl-layout">
+      <div class="reveal">
+        <div class="section-tag"><span>Metode Pembelajaran</span></div>
+        <h2 class="section-heading">Project Based<br><em>Learning</em></h2>
+        <div class="divider"></div>
+        <p class="section-sub">PBL adalah metode pembelajaran berbasis proyek yang memberikan kesempatan kepada mahasiswa untuk belajar secara langsung melalui kegiatan nyata — mulai dari perencanaan, budidaya, pemasaran, hingga evaluasi usaha pertanian.</p>
+      </div>
+      <div class="pbl-cards reveal">
+        <div class="pbl-card"><div class="pbl-num">01</div><div class="pbl-text"><strong>Keterampilan Praktik</strong><span>Mengembangkan kemampuan teknis budidaya langsung di lapangan.</span></div></div>
+        <div class="pbl-card"><div class="pbl-num">02</div><div class="pbl-text"><strong>Manajemen Usaha</strong><span>Melatih kemampuan manajemen agribisnis dari hulu ke hilir.</span></div></div>
+        <div class="pbl-card"><div class="pbl-num">03</div><div class="pbl-text"><strong>Jiwa Wirausaha</strong><span>Meningkatkan semangat kewirausahaan yang berorientasi pasar.</span></div></div>
+        <div class="pbl-card"><div class="pbl-num">04</div><div class="pbl-text"><strong>Link & Match Industri</strong><span>Menghubungkan pembelajaran kampus dengan kebutuhan industri.</span></div></div>
+        <div class="pbl-card"><div class="pbl-num">05</div><div class="pbl-text"><strong>Produk Nyata</strong><span>Menghasilkan produk bernilai jual yang dapat dipasarkan.</span></div></div>
+      </div>
     </div>
   </div>
-  <p class="proses-note">
-    Mahasiswa berperan langsung dalam setiap tahap, mulai dari produksi hingga pemasaran, sehingga menghasilkan produk yang tidak hanya berkualitas, tetapi juga penuh pembelajaran.
-  </p>
+</section>
+
+<!-- BUDIDAYA -->
+<section id="budidaya" class="sec">
+  <div class="inner">
+    <div class="bud-head reveal">
+      <div>
+        <div class="section-tag"><span>Proses Produksi</span></div>
+        <h2 class="section-heading">Dari Budidaya<br>Hingga <em>Panen</em></h2>
+      </div>
+      <p class="section-sub" style="max-width:380px">Kegiatan budidaya dilakukan secara terstruktur oleh mahasiswa melalui lima tahap utama yang dikerjakan dengan disiplin dan komitmen terhadap kualitas.</p>
+    </div>
+    <div class="stages reveal">
+      <div class="stage"><div class="st-num">01</div><span class="st-t">Persiapan Lahan & Media Tanam</span><span class="st-d">Menyiapkan lingkungan tanam yang sesuai agar tanaman melon tumbuh optimal.</span></div>
+      <div class="stage"><div class="st-num">02</div><span class="st-t">Penanaman Bibit</span><span class="st-d">Bibit dipilih selektif dan ditanam dengan memperhatikan jarak serta kondisi awal.</span></div>
+      <div class="stage"><div class="st-num">03</div><span class="st-t">Perawatan Tanaman</span><span class="st-d">Penyiraman, pemupukan, pengikatan, dan pemantauan pertumbuhan berkala.</span></div>
+      <div class="stage"><div class="st-num">04</div><span class="st-t">Seleksi Buah</span><span class="st-d">Buah dipilih agar nutrisi fokus pada buah terbaik untuk hasil maksimal.</span></div>
+      <div class="stage"><div class="st-num">05</div><span class="st-t">Panen & Pascapanen</span><span class="st-d">Dipanen tepat waktu, disortir, dan disiapkan untuk dipasarkan.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- KEUNGGULAN -->
+<section id="keunggulan" class="sec">
+  <div class="inner">
+    <div class="ku-layout">
+      <div class="reveal">
+        <div class="section-tag"><span>Keunggulan</span></div>
+        <h2 class="section-heading">Mengapa<br>Memilih<br><em>Kami?</em></h2>
+        <div class="divider"></div>
+        <p class="section-sub">Setiap buah melon adalah bukti nyata dari kerja keras, keilmuan, dan semangat belajar mahasiswa agribisnis.</p>
+      </div>
+      <div class="ku-grid reveal">
+        <div class="ku-card"><div class="ku-icon">🌿</div><span class="ku-t">Segar dari Kebun</span><span class="ku-d">Dipanen langsung dari hasil budidaya mahasiswa, kesegaran dan kualitas tetap terjaga.</span></div>
+        <div class="ku-card"><div class="ku-icon">✅</div><span class="ku-t">Kualitas Terjaga</span><span class="ku-d">Proses perawatan dilakukan secara rutin, teliti, dan terdokumentasi sepanjang siklus tanam.</span></div>
+        <div class="ku-card"><div class="ku-icon">🍈</div><span class="ku-t">Rasa & Tekstur</span><span class="ku-d">Manis alami dan menyegarkan, cocok dikonsumsi langsung maupun diolah.</span></div>
+        <div class="ku-card"><div class="ku-icon">🎓</div><span class="ku-t">Nilai Edukatif</span><span class="ku-d">Setiap pembelian mendukung pembelajaran praktik dan kewirausahaan mahasiswa.</span></div>
+        <div class="ku-card"><div class="ku-icon">📊</div><span class="ku-t">Pendekatan Agribisnis</span><span class="ku-d">Terkelola dari produksi hingga distribusi dengan prinsip manajemen modern.</span></div>
+        <div class="ku-card"><div class="ku-icon">❤️</div><span class="ku-t">Pilihan Berkontribusi</span><span class="ku-d">Membeli produk ini berarti turut berkontribusi pada ekosistem pendidikan pertanian.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALERI -->
+<section id="galeri" class="sec">
+  <div class="inner">
+    <div class="gal-head reveal">
+      <div>
+        <div class="section-tag"><span>Dokumentasi</span></div>
+        <h2 class="section-heading">Galeri <em>Kegiatan</em></h2>
+      </div>
+      <p style="font-size:.72rem;color:var(--muted);text-align:right;max-width:200px;line-height:1.7">Ganti placeholder dengan foto asli kegiatan.</p>
+    </div>
+    <div class="gal-grid reveal">
+      <div class="gal-item">
+        <div class="gal-ph" style="min-height:440px"><span class="gal-ph-note">src="foto-greenhouse.jpg"</span></div>
+        <div class="gal-info"><div class="gal-title">Persiapan Greenhouse / Lahan</div><div class="gal-desc">Mahasiswa mempersiapkan media tanam dan lingkungan greenhouse sebelum penanaman dimulai.</div></div>
+      </div>
+      <div class="gal-item">
+        <div class="gal-ph"><span class="gal-ph-note">src="foto-bibit.jpg"</span></div>
+        <div class="gal-info"><div class="gal-title">Penanaman Bibit</div><div class="gal-desc">Proses penanaman bibit melon dengan jarak tanam yang sesuai.</div></div>
+      </div>
+      <div class="gal-item">
+        <div class="gal-ph"><span class="gal-ph-note">src="foto-perawatan.jpg"</span></div>
+        <div class="gal-info"><div class="gal-title">Perawatan Tanaman</div><div class="gal-desc">Penyiraman, pemupukan, dan pemantauan pertumbuhan secara rutin.</div></div>
+      </div>
+      <div class="gal-item">
+        <div class="gal-ph"><span class="gal-ph-note">src="foto-buah.jpg"</span></div>
+        <div class="gal-info"><div class="gal-title">Pertumbuhan & Seleksi Buah</div><div class="gal-desc">Pemantauan buah dan proses seleksi untuk kualitas terbaik.</div></div>
+      </div>
+      <div class="gal-item">
+        <div class="gal-ph"><span class="gal-ph-note">src="foto-panen.jpg"</span></div>
+        <div class="gal-info"><div class="gal-title">Panen Melon Premium</div><div class="gal-desc">Hasil panen melon premium siap disortir dan dipasarkan.</div></div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- TESTIMONI -->
-<section class="testimoni" id="testimoni">
-  <div class="testimoni-header fade-up">
-    <p class="section-tag">Ulasan</p>
-    <h2 class="section-title">Apa Kata Mereka</h2>
-  </div>
-  <div class="testi-grid">
-    <div class="testi-card fade-up">
-      <div class="testi-stars">★★★★★</div>
-      <p class="testi-text">"Melonnya manis dan segar, kualitasnya bagus! Tidak kalah sama melon yang dijual di supermarket, tapi lebih terpercaya karena langsung dari mahasiswa."</p>
-      <div class="testi-author">
-        <div class="testi-avatar">
-          <!-- SLOT FOTO TESTIMONI 1: Ganti src dengan foto pelanggan -->
-          <img src="" alt="" onerror="this.style.display='none'; this.parentElement.textContent='AB';">
-        </div>
-        <div>
-          <div class="testi-name">[Nama Pelanggan 1]</div>
-          <div class="testi-role">Pembeli</div>
+<section id="testimoni" class="sec">
+  <div class="inner">
+    <div class="reveal" style="max-width:480px">
+      <div class="section-tag"><span>Testimoni</span></div>
+      <h2 class="section-heading">Apa Kata <em>Mereka?</em></h2>
+    </div>
+    <div class="testi-grid reveal">
+      <div class="testi-card">
+        <span class="testi-q">"</span>
+        <p class="testi-text">Melonnya segar, manis, dan kualitasnya bagus. Menarik sekali karena ini merupakan hasil praktik langsung dari mahasiswa yang bersemangat.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">K</div>
+          <div><div class="testi-name">Konsumen Pertama</div><div class="testi-role">Pembeli Melon Premium</div></div>
         </div>
       </div>
-    </div>
-    <div class="testi-card fade-up">
-      <div class="testi-stars">★★★★★</div>
-      <p class="testi-text">"Proyek ini sangat membantu mahasiswa memahami bisnis agribisnis secara nyata. Saya sangat mengapresiasi inisiatif PBL yang menghasilkan produk berkualitas seperti ini."</p>
-      <div class="testi-author">
-        <div class="testi-avatar" style="background: linear-gradient(135deg, #e8894a, #f5c07a);">
-          <!-- SLOT FOTO TESTIMONI 2: Ganti src dengan foto pelanggan -->
-          <img src="" alt="" onerror="this.style.display='none'; this.parentElement.textContent='CD';">
+      <div class="testi-card">
+        <span class="testi-q">"</span>
+        <p class="testi-text">Kegiatan PBL seperti ini sangat bermanfaat. Mahasiswa bisa belajar budidaya sekaligus pemasaran produk secara nyata dan terstruktur.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">D</div>
+          <div><div class="testi-name">Dosen Pembimbing</div><div class="testi-role">Manajemen Agribisnis, Polije</div></div>
         </div>
-        <div>
-          <div class="testi-name">[Nama Pelanggan 2]</div>
-          <div class="testi-role">Dosen / Akademisi</div>
+      </div>
+      <div class="testi-card">
+        <span class="testi-q">"</span>
+        <p class="testi-text">Kualitas melon ini setara dengan produk komersial dari petani profesional. Luar biasa untuk hasil karya mahasiswa yang masih belajar.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">M</div>
+          <div><div class="testi-name">Mitra Usaha</div><div class="testi-role">Distributor Lokal, Bondowoso</div></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CTA SECTION -->
-<section class="cta-section" id="pesan">
-  <div style="position:relative; z-index:1;">
-    <p class="section-tag" style="color: var(--green-light); text-align:center;">Dukung Produk Mahasiswa</p>
-    <h2 class="section-title" style="text-align:center; max-width:600px; margin: 0 auto 20px;">Dukung Produk Mahasiswa, Nikmati Kualitasnya</h2>
-    <p class="section-desc" style="text-align:center; margin: 0 auto 44px;">Dengan membeli produk ini, Anda tidak hanya mendapatkan melon berkualitas, tetapi juga mendukung proses pembelajaran mahasiswa yang bermanfaat.</p>
-    <div style="text-align:center;">
-      <!-- Ganti [nomor] dengan nomor WhatsApp Anda -->
-      <a href="https://wa.me/[nomor]?text=Halo%2C%20saya%20ingin%20memesan%20Melon%20Premium%20PBL%20Manajemen%20Agribisnis" 
-         class="btn-whatsapp" target="_blank">
-        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        Pesan Sekarang via WhatsApp
-      </a>
+<!-- PESAN -->
+<section id="pesan" class="sec">
+  <div class="inner">
+    <div class="reveal" style="max-width:480px">
+      <div class="section-tag"><span>Pemesanan</span></div>
+      <h2 class="section-heading">Pesan <em>Sekarang</em></h2>
+      <div class="divider"></div>
+      <p class="section-sub">Tersedia dalam jumlah terbatas sesuai hasil panen. Hubungi kami segera sebelum kehabisan.</p>
     </div>
-    <p class="cta-guarantee">🔒 Respon cepat · Harga terjangkau · Langsung dari kebun</p>
+    <div class="pesan-grid reveal">
+      <div>
+        <div class="info-card">
+          <div class="info-card-head">
+            <span class="info-card-head-icon">📦</span>
+            <span class="info-card-head-title">Informasi Produk & Pemesanan</span>
+          </div>
+          <div class="info-row"><span class="i-k">Harga</span><span class="i-v">Hubungi kami untuk informasi harga terkini per buah / per kilogram.</span></div>
+          <div class="info-row"><span class="i-k">Sistem</span><span class="i-v">Pre-order dan pembelian langsung saat stok tersedia.</span></div>
+          <div class="info-row"><span class="i-k">Lokasi</span><span class="i-v">Politeknik Negeri Jember Kampus 2 Bondowoso, Jawa Timur.</span></div>
+          <div class="info-row"><span class="i-k">Jadwal</span><span class="i-v">Ketersediaan stok diinformasikan melalui WhatsApp.</span></div>
+        </div>
+        <a href="https://wa.me/6282141955268?text=Halo%2C+saya+ingin+memesan+Melon+Premium+PBL+%F0%9F%8D%88%0A%0ANama+saya%3A+%5BNama+Anda%5D%0AJumlah+yang+ingin+dipesan%3A+%5Bjumlah%5D%0AKeperluan%3A+%5Bkonsumsi+pribadi%2Foleh-oleh%2Facara%5D%0AAlamat+pengiriman%2Fpengambilan%3A+%5BAlamat%5D%0A%0ATerima+kasih!" target="_blank" class="cta-wa">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="width:20px;height:20px;fill:white;flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Hubungi via WhatsApp
+        </a>
+        <a href="https://wa.me/6282141955268?text=Halo%2C+saya+ingin+pre-order+Melon+Premium+PBL+%F0%9F%8D%88%0A%0ANama%3A+%5BNama+Anda%5D%0AJumlah+pre-order%3A+%5Bjumlah%5D+buah%2Fkg%0AKontak%3A+%5BNomor+WA+aktif%5D%0AKeperluan%3A+%5Bkonsumsi+pribadi%2Fhampers%2Facara%5D%0A%0AMohon+info+harga+dan+estimasi+panen.+Terima+kasih!" target="_blank" class="cta-order">
+          🌿 Pre-Order Melon Premium
+        </a>
+      </div>
+      <div>
+        <p class="section-sub" style="margin-bottom:18px">Tersedia untuk berbagai kebutuhan:</p>
+        <div class="avail-list">
+          <div class="avail-row"><span class="avail-name"><span class="avail-dot"></span>Konsumsi Pribadi & Keluarga</span><span class="avail-tag ready">Tersedia</span></div>
+          <div class="avail-row"><span class="avail-name"><span class="avail-dot"></span>Oleh-oleh & Hampers</span><span class="avail-tag ready">Tersedia</span></div>
+          <div class="avail-row"><span class="avail-name"><span class="avail-dot"></span>Kebutuhan Acara & Event</span><span class="avail-tag ready">Tersedia</span></div>
+          <div class="avail-row"><span class="avail-name"><span class="avail-dot"></span>Pembelian Partai / Reseller</span><span class="avail-tag inquiry">Hubungi Kami</span></div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- TIM -->
+<section id="tim" class="sec">
+  <div class="inner">
+    <div class="tim-layout">
+      <div class="reveal">
+        <div class="tim-img-wrap">
+          <div class="tim-img-ph"><span class="tim-img-caption">src="foto-tim.jpg"</span></div>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="section-tag"><span>Tentang Tim</span></div>
+        <h2 class="section-heading">Dikelola<br>Mahasiswa<br><em>Agribisnis</em></h2>
+        <div class="divider"></div>
+        <p class="section-sub">Produk melon premium ini dikelola oleh mahasiswa Manajemen Agribisnis Politeknik Negeri Jember Kampus 2 Bondowoso sebagai bagian dari kegiatan Project Based Learning.</p>
+        <div class="tim-rows">
+          <div class="tim-row"><span class="tim-k">Program Studi</span><span class="tim-v">Manajemen Agribisnis</span></div>
+          <div class="tim-row"><span class="tim-k">Institusi</span><span class="tim-v">Politeknik Negeri Jember Kampus 2 Bondowoso</span></div>
+          <div class="tim-row"><span class="tim-k">Pembimbing</span><span class="tim-v">Irzaq Galuh Pranata, S.P., M.P.</span></div>
+          <div class="tim-row"><span class="tim-k">Tahun</span><span class="tim-v">2025/2026</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KRITIK & SARAN via FORM → WA -->
+<section id="kritik" class="sec">
+  <div class="kritik-blob kritik-blob-1"></div>
+  <div class="kritik-blob kritik-blob-2"></div>
+
+  <div class="kritik-inner reveal">
+    <div class="kritik-header">
+      <div class="kritik-tag"><span>Partisipasi & Masukan</span></div>
+      <h2 class="kritik-title">Kritik &amp; <em>Saran</em> untuk Kami</h2>
+      <p class="kritik-sub">Isi form di bawah, klik kirim — pesan Anda langsung masuk ke WhatsApp tim kami, sudah terformat rapi dan siap dikirim.</p>
+    </div>
+
+    <div class="kritik-layout">
+      <!-- FORM -->
+      <div class="form-card">
+        <div class="form-group">
+          <label class="form-label" for="f-nama">Nama <span style="color:rgba(255,255,255,.3);font-weight:400">(opsional)</span></label>
+          <input class="form-input" id="f-nama" type="text" placeholder="Nama Anda atau biarkan kosong (Anonim)" oninput="updatePreview()">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="f-kat">Kategori Masukan</label>
+          <select class="form-select" id="f-kat" onchange="updatePreview()">
+            <option value="Kualitas Produk">🍈 Kualitas Produk</option>
+            <option value="Harga">💰 Harga & Nilai</option>
+            <option value="Pelayanan">🤝 Pelayanan</option>
+            <option value="Kemasan">📦 Kemasan</option>
+            <option value="Kegiatan PBL">🎓 Kegiatan PBL</option>
+            <option value="Lainnya">💬 Lainnya</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Penilaian</label>
+          <div class="star-row" id="star-row">
+            <button type="button" class="star-btn" data-v="1" onclick="setRating(1)">★</button>
+            <button type="button" class="star-btn" data-v="2" onclick="setRating(2)">★</button>
+            <button type="button" class="star-btn" data-v="3" onclick="setRating(3)">★</button>
+            <button type="button" class="star-btn" data-v="4" onclick="setRating(4)">★</button>
+            <button type="button" class="star-btn" data-v="5" onclick="setRating(5)">★</button>
+            <span class="star-label" id="star-label">Pilih bintang</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="f-msg">Pesan / Masukan <span style="color:#ff6b6b">*</span></label>
+          <textarea class="form-textarea" id="f-msg" placeholder="Tuliskan kritik, saran, atau masukan Anda di sini..." oninput="updatePreview()"></textarea>
+        </div>
+
+        <button class="form-submit" id="form-submit-btn" onclick="kirimKeWA()">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Kirim via WhatsApp
+        </button>
+        <p class="form-note">Klik kirim → WhatsApp terbuka otomatis dengan pesan yang sudah terformat ✨</p>
+      </div>
+
+      <!-- LIVE PREVIEW -->
+      <div class="preview-card">
+        <div class="preview-header">
+          <span class="preview-header-dot"></span>
+          <span class="preview-header-label">Preview pesan WhatsApp</span>
+        </div>
+        <div class="preview-wa-header">
+          <div class="preview-wa-avatar">🍈</div>
+          <div>
+            <div class="preview-wa-name">Tim PBL Melon Premium</div>
+            <div class="preview-wa-status">Polije Kampus 2 Bondowoso</div>
+          </div>
+        </div>
+        <div class="preview-bubble-wrap">
+          <div class="preview-bubble" id="preview-bubble">Halo Tim PBL Melon Premium! 👋
+
+Saya ingin menyampaikan kritik/saran:
+
+<strong>Nama:</strong> Anonim
+<strong>Kategori:</strong> Kualitas Produk
+<strong>Penilaian:</strong> (belum dipilih)
+
+<strong>Pesan:</strong>
+(belum diisi)
+
+Terima kasih! 🙏</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <footer>
-  <div class="footer-grid">
-    <div class="footer-brand">
-      <span class="nav-logo">Melon<span style="color: var(--green-light); font-style:italic;">PBL</span></span>
-      <p>Produk melon premium hasil kegiatan Project-Based Learning mahasiswa Program Studi Manajemen Agribisnis, [Nama Kampus].</p>
+  <div class="foot-grid">
+    <div>
+      <span class="foot-brand">🍈 Melon Premium PBL</span>
+      <p class="foot-desc">Dukung produk lokal, dukung pembelajaran mahasiswa, dan nikmati melon premium berkualitas dari hasil budidaya nyata.</p>
+      <div class="foot-badge">
+        <span class="foot-badge-dot"></span>
+        <span>Stok Tersedia</span>
+      </div>
     </div>
-    <div class="footer-col">
-      <h4>Navigasi</h4>
-      <ul>
-        <li><a href="#produk">Produk</a></li>
-        <li><a href="#tentang">Tentang PBL</a></li>
-        <li><a href="#proses">Proses Produksi</a></li>
-        <li><a href="#testimoni">Testimoni</a></li>
-      </ul>
+    <div class="foot-col">
+      <h5>Navigasi</h5>
+      <a href="#produk">Produk</a>
+      <a href="#pbl">Tentang PBL</a>
+      <a href="#budidaya">Budidaya</a>
+      <a href="#galeri">Galeri</a>
+      <a href="#tim">Tim</a>
+      <a href="#kritik">Kritik & Saran</a>
     </div>
-    <div class="footer-col footer-contact">
-      <h4>Kontak</h4>
-      <!-- Ganti [nomor] dan [akun] sesuai data Anda -->
-      <a href="https://wa.me/[nomor]" target="_blank">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#25d366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        WhatsApp: [nomor]
-      </a>
-      <a href="https://instagram.com/[akun]" target="_blank">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#c13584"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="#c13584" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="#c13584" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.5" fill="#c13584"/></svg>
-        Instagram: @[akun]
-      </a>
+    <div class="foot-col">
+      <h5>Kontak</h5>
+      <a href="https://wa.me/6282141955268" target="_blank">WhatsApp: +62 812-XXXX-XXXX</a>
+      <a href="#" target="_blank">Instagram: @MNA_BONDOWOSO</a>
+      <p>Polije Kampus 2 Bondowoso, Jawa Timur</p>
     </div>
   </div>
-  <div class="footer-bottom">
-    <span>© 2025 Melon PBL · Manajemen Agribisnis · [Nama Kampus]</span>
-    <span style="color: rgba(255,255,255,0.2);">Dibuat dengan 🌿 oleh Mahasiswa</span>
+  <div class="foot-bottom">
+    <span class="foot-copy">© 2024 Melon Premium PBL · Manajemen Agribisnis · Politeknik Negeri Jember Kampus 2 Bondowoso</span>
+    <span class="foot-made">Dibuat oleh Mahasiswa Agribisnis 🌿</span>
   </div>
 </footer>
 
-<!-- FLOAT WA -->
-<a href="https://wa.me/[nomor]" class="float-wa" target="_blank" title="Chat WhatsApp">
-  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-</a>
-
 <script>
-  // SCROLL ANIMATION
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(el => {
-      if (el.isIntersecting) {
-        el.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.15 });
+// ── REVEAL ON SCROLL ──
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('up'); io.unobserve(e.target) } })
+}, { threshold: .08 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+// ── CONFIG ──
+const WA_NUM = '62821419552688'; // ← Ganti nomor WA di sini
 
-  // NAV SCROLL EFFECT
-  window.addEventListener('scroll', () => {
-    const nav = document.querySelector('nav');
-    nav.style.boxShadow = window.scrollY > 50
-      ? '0 4px 24px rgba(0,0,0,0.08)'
-      : 'none';
-  });
+// ── STATE ──
+let rating = 0;
+const starLabels = ['', 'Kurang 😕', 'Cukup 🙂', 'Baik 👍', 'Bagus 😊', 'Sangat Bagus 🤩'];
 
-  // IMAGE SLOT HANDLER
-  document.querySelectorAll('img[src=""]').forEach(img => {
-    img.style.display = 'none';
-  });
+// ── STAR RATING ──
+function setRating(val) {
+  rating = val;
+  document.querySelectorAll('.star-btn').forEach((b, i) => b.classList.toggle('active', i < val));
+  document.getElementById('star-label').textContent = starLabels[val];
+  updatePreview();
+}
+
+// ── LIVE PREVIEW ──
+function getStarStr(n) {
+  if (!n) return '(belum dipilih)';
+  return '★'.repeat(n) + '☆'.repeat(5 - n) + ' — ' + starLabels[n];
+}
+
+function updatePreview() {
+  const nama   = document.getElementById('f-nama').value.trim() || 'Anonim';
+  const kat    = document.getElementById('f-kat').value;
+  const msg    = document.getElementById('f-msg').value.trim() || '(belum diisi)';
+  const bubble = document.getElementById('preview-bubble');
+
+  bubble.innerHTML =
+    `<strong>Halo Tim PBL Melon Premium! 👋</strong>\n\nSaya ingin menyampaikan kritik/saran:\n\n` +
+    `<strong>Nama:</strong> ${escHtml(nama)}\n` +
+    `<strong>Kategori:</strong> ${escHtml(kat)}\n` +
+    `<strong>Penilaian:</strong> <em>${getStarStr(rating)}</em>\n\n` +
+    `<strong>Pesan:</strong>\n${escHtml(msg)}\n\nTerima kasih! 🙏`;
+}
+
+function escHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+// ── KIRIM KE WA ──
+function kirimKeWA() {
+  const msg = document.getElementById('f-msg').value.trim();
+  if (!msg) {
+    shakeEl(document.getElementById('f-msg'));
+    return;
+  }
+  const nama = document.getElementById('f-nama').value.trim() || 'Anonim';
+  const kat  = document.getElementById('f-kat').value;
+  const text =
+`Halo Tim PBL Melon Premium! 👋
+
+Saya ingin menyampaikan kritik/saran:
+
+Nama: ${nama}
+Kategori: ${kat}
+Penilaian: ${rating ? '★'.repeat(rating) + '☆'.repeat(5 - rating) + ' (' + rating + '/5)' : 'Tidak memberikan rating'}
+
+Pesan:
+${msg}
+
+Terima kasih! 🙏`;
+
+  window.open(`https://wa.me/${WA_NUM}?text=${encodeURIComponent(text)}`, '_blank');
+}
+
+function shakeEl(el) {
+  el.style.borderColor = '#ff6b6b';
+  el.focus();
+  setTimeout(() => { el.style.borderColor = '' }, 1800);
+}
 </script>
 </body>
 </html>
